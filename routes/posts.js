@@ -3,6 +3,14 @@ const express = require('express');
 const router = express.Router();
 const Post = require('../models/Post');
 
+// Middleware to skip favicon requests
+router.use((req, res, next) => {
+  if (req.url === '/favicon.ico') {
+    return res.status(204).end();
+  }
+  next();
+});
+
 // Index route - show all posts
 router.get('/dashboard', async (req, res) => {
   try {
