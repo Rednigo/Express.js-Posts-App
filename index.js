@@ -7,6 +7,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 const passport = require("passport");
 const { loginCheck } = require("./auth/passport");
+const flash = require('connect-flash');
 loginCheck(passport); 
 
 // Mongo DB conncetion
@@ -24,6 +25,11 @@ app.use(session({
     saveUninitialized: true,
     resave: true
   }));
+app.use(flash());
+app.use((req, res, next) => {
+  res.locals.messages = req.flash();
+  next();
+});
 app.use(methodOverride('_method'));
 
 app.use(passport.initialize());
