@@ -17,6 +17,14 @@ mongoose.connect(database)
 
 app.set('view engine', 'ejs');
 
+// Middleware to skip favicon requests
+router.use((req, res, next) => {
+  if (req.url === '/favicon.ico') {
+    return res.status(204).end();
+  }
+  next();
+});
+
 //BodyParsing
 app.use(express.urlencoded({extended: false}));
 app.use(session({
