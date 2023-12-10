@@ -1,0 +1,13 @@
+<%- include('layout.ejs'); %>
+<!-- views/show.ejs -->
+<div class="container mt-5">
+    <h1><%= post.title %></h1>
+    <p><%= post.description %></p>
+    <div class="d-flex">
+      <a href="/<%= post._id %>/edit" class="btn btn-warning mr-2">Edit</a>
+      <form action="/<%= post._id %>?_method=DELETE" method="POST" style="display:inline;">
+        <button type="submit" class="btn btn-danger">Delete</button>
+      </form>
+    </div>
+    <a href="/dashboard" class="btn btn-secondary mt-3">Back to All Posts</a>
+</div>
